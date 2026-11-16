@@ -132,7 +132,7 @@ def _fetch_batch(cities):
         "forecast_days": 2,
         "timezone": "Asia/Kolkata",
     }
-    response = requests.get(AIR_URL, params=params, timeout=(5, 20))
+    response = requests.get(AIR_URL, params=params, timeout=(10, 30))
     response.raise_for_status()
     data = response.json()
     return data if isinstance(data, list) else [data]
@@ -185,7 +185,7 @@ def fetch_live_stations(city=None, limit=300):
 
     # Keep requests manageable; batches are fetched concurrently.
     batches = [selected[i:i + 40] for i in range(0, len(selected), 40)]
-    with ThreadPoolExecutor(max_workers=3) as pool:
+    with ThreadPoolExecutor(max_workers=1) as pool: 
         results_by_batch = list(pool.map(_fetch_batch, batches))
 
     stations = []
