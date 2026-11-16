@@ -159,7 +159,7 @@ def _fetch_batch(cities):
                     pm25, pm10, no2, so2, co = 42.5, 70.0, 18.2, 7.1, 0.7
                     
                 fallback.append({
-                    "current": {git add .
+                    "current": {
                         "pm2_5": pm25, 
                         "pm10": pm10, 
                         "nitrogen_dioxide": no2, 
