@@ -150,7 +150,7 @@ def _fetch_batch(cities):
                 
                 # Simulate Very Unhealthy AQI (250-350 range) for major cities and NCR
                 if city_name in ["Delhi", "Faridabad", "Gurugram", "Noida", "Ghaziabad", "Mumbai", "Kolkata", "Lucknow", "Patna", "Kanpur"]:
-                    pm25, pm10, no2, so2, co = 198.5, 285.0, 52.4, 19.1, 1.6
+                    pm25, pm10, no2, so2, co = 145.5, 195.0, 42.4, 15.1, 1.2
                 # Simulate Moderate AQI (100-150 range) for other tech hubs
                 elif city_name in ["Chennai", "Bengaluru", "Hyderabad", "Pune", "Ahmedabad"]:
                     pm25, pm10, no2, so2, co = 85.0, 120.0, 32.0, 12.0, 1.1
