@@ -132,6 +132,10 @@ def _fetch_batch(cities):
         "forecast_days": 2,
         "timezone": "Asia/Kolkata",
     }
+    
+    # ADD THIS LINE: Pause for 1.5 seconds to prevent 429 Rate Limit errors
+    time.sleep(1.5) 
+    
     response = requests.get(AIR_URL, params=params, timeout=(10, 30))
     response.raise_for_status()
     data = response.json()
