@@ -148,15 +148,15 @@ def _fetch_batch(cities):
             for c in cities:
                 city_name = c[0]
                 
-                # Simulate severe pollution for Delhi/NCR
+                # Simulate severe pollution for Delhi/NCR (realistic units)
                 if city_name in ["Delhi", "Faridabad", "Gurugram", "Noida", "Ghaziabad", "Meerut"]:
-                    pm25, pm10, no2, so2, co = 395.5, 485.0, 75.2, 28.1, 1850.0
+                    pm25, pm10, no2, so2, co = 285.5, 345.0, 55.2, 18.1, 2.1
                 # Simulate moderate pollution for other metros
                 elif city_name in ["Mumbai", "Kolkata", "Ahmedabad", "Patna"]:
-                    pm25, pm10, no2, so2, co = 145.0, 190.0, 45.0, 15.0, 900.0
+                    pm25, pm10, no2, so2, co = 115.0, 140.0, 35.0, 12.0, 1.2
                 # Default for rest of India
                 else:
-                    pm25, pm10, no2, so2, co = 75.5, 110.0, 25.2, 8.1, 500.0
+                    pm25, pm10, no2, so2, co = 55.5, 80.0, 20.2, 8.1, 0.8
                     
                 fallback.append({
                     "current": {
