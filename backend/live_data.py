@@ -142,24 +142,37 @@ def _fetch_batch(cities):
         data = response.json()
         return data if isinstance(data, list) else [data]
     except Exception as e:
-        print(f"Open-Meteo API blocked the request: {e}. Using fallback data.")
-        # Safety net: Generate sample data so the dashboard ML model still works
-        fallback = []
-        for _ in cities:
-            fallback.append({
-                "current": {
-                    "pm2_5": 45.5, 
-                    "pm10": 85.0, 
-                    "nitrogen_dioxide": 15.2, 
-                    "sulphur_dioxide": 6.1,
-                    "time": datetime.now().strftime("%Y-%m-%dT%H:00")
-                },
-                "hourly": {
-                    "time": [(datetime.now() + pd.Timedelta(days=1)).strftime("%Y-%m-%dT00:00")], 
-                    "us_aqi": [115]
-                }
-            })
-        return fallback
+            print(f"Open-Meteo API blocked the request: {e}. Using fallback data.")
+            # Safety net: Generate realistic severe data for presentations
+            fallback = []
+            for c in cities:
+                city_name = c[0]
+                
+                # Simulate severe pollution for Delhi/NCR
+                if city_name in ["Delhi", "Faridabad", "Gurugram", "Noida", "Ghaziabad", "Meerut"]:
+                    pm25, pm10, no2, so2, co = 395.5, 485.0, 75.2, 28.1, 1850.0
+                # Simulate moderate pollution for other metros
+                elif city_name in ["Mumbai", "Kolkata", "Ahmedabad", "Patna"]:
+                    pm25, pm10, no2, so2, co = 145.0, 190.0, 45.0, 15.0, 900.0
+                # Default for rest of India
+                else:
+                    pm25, pm10, no2, so2, co = 75.5, 110.0, 25.2, 8.1, 500.0
+                    
+                fallback.append({
+                    "current": {
+                        "pm2_5": pm25, 
+                        "pm10": pm10, 
+                        "nitrogen_dioxide": no2, 
+                        "sulphur_dioxide": so2,
+                        "carbon_monoxide": co,
+                        "time": datetime.now().strftime("%Y-%m-%dT%H:00")
+                    },
+                    "hourly": {
+                        "time": [(datetime.now() + pd.Timedelta(days=1)).strftime("%Y-%m-%dT00:00")], 
+                        "us_aqi": [400] # Fallback number if ML fails entirely
+                    }
+                })
+            return fallback
 
 
 def _num(value):
