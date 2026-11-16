@@ -148,18 +148,18 @@ def _fetch_batch(cities):
             for c in cities:
                 city_name = c[0]
                 
-                # Simulate severe pollution for Delhi/NCR (realistic units)
-                if city_name in ["Delhi", "Faridabad", "Gurugram", "Noida", "Ghaziabad", "Meerut"]:
-                    pm25, pm10, no2, so2, co = 285.5, 345.0, 55.2, 18.1, 2.1
-                # Simulate moderate pollution for other metros
-                elif city_name in ["Mumbai", "Kolkata", "Ahmedabad", "Patna"]:
-                    pm25, pm10, no2, so2, co = 115.0, 140.0, 35.0, 12.0, 1.2
-                # Default for rest of India
+                # Simulate Very Unhealthy AQI (250-350 range) for major cities and NCR
+                if city_name in ["Delhi", "Faridabad", "Gurugram", "Noida", "Ghaziabad", "Mumbai", "Kolkata", "Lucknow", "Patna", "Kanpur"]:
+                    pm25, pm10, no2, so2, co = 198.5, 285.0, 52.4, 19.1, 1.6
+                # Simulate Moderate AQI (100-150 range) for other tech hubs
+                elif city_name in ["Chennai", "Bengaluru", "Hyderabad", "Pune", "Ahmedabad"]:
+                    pm25, pm10, no2, so2, co = 85.0, 120.0, 32.0, 12.0, 1.1
+                # Default Good/Satisfactory AQI (50-90 range) for the rest of India
                 else:
-                    pm25, pm10, no2, so2, co = 55.5, 80.0, 20.2, 8.1, 0.8
+                    pm25, pm10, no2, so2, co = 42.5, 70.0, 18.2, 7.1, 0.7
                     
                 fallback.append({
-                    "current": {
+                    "current": {git add .
                         "pm2_5": pm25, 
                         "pm10": pm10, 
                         "nitrogen_dioxide": no2, 
